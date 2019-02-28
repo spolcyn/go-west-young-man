@@ -6,6 +6,9 @@
 - Can use either factored or multiple import statements
 - Names beginning with capital letter are 'exported' (i.e., can access from another package -- unexported names not accessible outside the package)
 * Package names can be lowercase though (and usually are?)
+- In functions, arguments can have type at end of sequence of var names that are all the same type, e.g., (x, y int) 
+- Crazy: Functions can return more than one value, e.g., func swap (x,y string) (string, string) and you can make two variables equal to the result of that, e.g., a,b := swap("hello", "world")
+- Can name your return values, then "return" just returns that (that's a 'naked return')
 
 ### https://blog.golang.org/gos-declaration-syntax 
 An interesting article about Go's declaration syntax. 
