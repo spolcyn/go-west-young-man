@@ -9,6 +9,9 @@
 - In functions, arguments can have type at end of sequence of var names that are all the same type, e.g., (x, y int) 
 - Crazy: Functions can return more than one value, e.g., func swap (x,y string) (string, string) and you can make two variables equal to the result of that, e.g., a,b := swap("hello", "world")
 - Can name your return values, then "return" just returns that (that's a 'naked return')
+- If an initializer is present, type is inferred from initializer 
+- Can use 'short assignment' (:=) *only in a function*; has an implicit type (e.g., k := 3)
+- Can use the %T in printing to output type of a variable, %v for the actual variable
 
 ### https://blog.golang.org/gos-declaration-syntax 
 An interesting article about Go's declaration syntax. 
