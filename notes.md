@@ -12,6 +12,8 @@
 - If an initializer is present, type is inferred from initializer 
 - Can use 'short assignment' (:=) *only in a function*; has an implicit type (e.g., k := 3)
 - Can use the %T in printing to output type of a variable, %v for the actual variable
+- Variables w/o explicit initialized value given 'zero' value which is 0, false or "" as appropriate
+- Casting requires explicit converstion -- like function call, e.g., Type(var)
 
 ### https://blog.golang.org/gos-declaration-syntax 
 An interesting article about Go's declaration syntax. 
