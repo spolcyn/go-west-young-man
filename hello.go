@@ -3,21 +3,16 @@ package main
 
 import (
     "fmt" //'formatted IO'
+    "math"
 )
 
-const (
-    Big = 1 << 100
-    Small = Big >> 99
-)
-
-func needInt(x int) int {return x*10 + 1 }
-func needFloat(x float64) float64 {
-    return x * .1
+func sqrt(x float64) string {
+    if x < 0 {
+        return sqrt(-x) + "i"
+    }
+    return fmt.Sprint(math.Sqrt(x))
 }
 
 func main() {
-    fmt.Println(needInt(Small))
-    fmt.Println(needFloat(Small))
-    fmt.Println(needFloat(Big))
-    fmt.Println(needInt(Big))
+    fmt.Println(sqrt(2), sqrt(-4))
 }

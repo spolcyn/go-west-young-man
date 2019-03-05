@@ -15,6 +15,13 @@
 - Variables w/o explicit initialized value given 'zero' value which is 0, false or "" as appropriate
 - Casting requires explicit converstion -- like function call, e.g., Type(var)
 
+## Flow Control
+- Go only has for loops, and braces are always required
+- while is just for, but with no init or increment statement and no semicolons around it 
+- omitting condition for for loop is an infite loop (for {})
+- Go's if statements also don't require parantheses, and always require braces
+- If statements can have variable declarations in them (if v:= 5; v < 6 is true)
+
 ### https://blog.golang.org/gos-declaration-syntax 
 An interesting article about Go's declaration syntax. 
 - Takeaways:
