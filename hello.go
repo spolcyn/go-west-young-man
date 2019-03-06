@@ -6,15 +6,18 @@ import (
     "math"
 )
 
-func pow(x, n, lim float64) float64 {
-    if v := math.Pow(x, n); v < lim {
-        return v
-    } else {
-        fmt.Printf("%g >= %g\n", v, lim)
+func Sqrt(x float64) float64 {
+    
+    z:= x/2
+    diff := .000000000000001
+    for math.Abs(z*z - x) > diff  {
+        z -= (z*z - x) / (2*z)
     }
-    return lim
+
+    return z
 }
 
 func main() {
-    fmt.Println( pow(3, 2, 10), pow(3, 3, 20))
+    fmt.Println(math.Sqrt(2))
+    fmt.Println(Sqrt(2))
 }
