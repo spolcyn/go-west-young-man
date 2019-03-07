@@ -21,6 +21,8 @@
 - omitting condition for for loop is an infite loop (for {})
 - Go's if statements also don't require parantheses, and always require braces
 - If statements can have variable declarations in them (if v:= 5; v < 6 is true)
+- Go switch statement runs only selected case, and cases can be whatever variable type you want
+- Can use Switch to write clean long if-then-else chains
 
 ### https://blog.golang.org/gos-declaration-syntax 
 An interesting article about Go's declaration syntax. 
