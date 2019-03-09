@@ -39,5 +39,12 @@ A blog post about these new defer, panic, and recover features.
     * Deferred function's arguments evaluated when defer statement is evaluated
     * Deferred functions executed in LIFO after surround function returns
     * Deferred function's may read and assign to returning function's named return values
-- Panic: 
+- Panic: Stops ordinary flow control and starts "panicking"
+    * Deferred functions executed normally
+    * Next function up call stack gets panic called
+    * Panic continues up stack until all functions in goroutine have returned, then program crashes
+- Recover: Regains control of panicking goroutine
+    * Useful only inside deferred functions (why? because only deferred functions will execute normally)
+    * Normal execution (i.e., no panicking occurring): return nil, no other effects
+    * Panicking Execution: Recover value given to panic, resume normal execution
 
