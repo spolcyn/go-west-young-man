@@ -48,3 +48,6 @@ A blog post about these new defer, panic, and recover features.
     * Normal execution (i.e., no panicking occurring): return nil, no other effects
     * Panicking Execution: Recover value given to panic, resume normal execution
 
+## More Types
+- Go has pointers, no pointer arithmetic 
+- Go has structs ("type NAME struct {}")
