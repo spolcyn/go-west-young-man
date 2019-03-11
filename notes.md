@@ -51,3 +51,7 @@ A blog post about these new defer, panic, and recover features.
 ## More Types
 - Go has pointers, no pointer arithmetic 
 - Go has structs ("type NAME struct {}")
+    * Structs are initialized using brackets, e.g., Vertex{1,2}
+    * Accessing member field is done with '.', whether or not the struct is raw or its a pointer to the struct
+    * Can get address of struct using the & operator
+- You can natively set a value using exponential notation, e.g., 1e9 will set something to a billion
