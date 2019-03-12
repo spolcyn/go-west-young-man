@@ -5,20 +5,22 @@ import (
     "fmt" //'formatted IO'
 )
 
-type Vertex struct {
-    X int
-    Y int
-}
-
-var (
-    v1 = Vertex{1,2}
-    v2 = Vertex{X: 1} // Y:0 is implicit
-    v3 = Vertex{}
-    p = &Vertex{1,2} //has type *Vertex
-)
-
 func main() {
-    fmt.Println(v1, p, v2, v3)
+    names := [4]string{
+        "John",
+        "Paul",
+        "George",
+        "Ringo",
+    }
+    fmt.Println(names)
+
+    a := names[0:2]
+    b := names[1:3]
+    fmt.Println(a,b)
+
+    b[0] = "XXX"
+    fmt.Println(a,b)
+    fmt.Println(names)
 }
 
 

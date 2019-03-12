@@ -55,3 +55,6 @@ A blog post about these new defer, panic, and recover features.
     * Accessing member field is done with '.', whether or not the struct is raw or its a pointer to the struct
     * Can get address of struct using the & operator
 - You can natively set a value using exponential notation, e.g., 1e9 will set something to a billion
+- Go has arrays, and its length is part of its type so they can't be resized
+    * "Slices" are dynamically-sized, subsets of the elements of an array - you form it with a high and low bound on another array, e.g., var s []int = primes[1:4], which includes elements 1-3 of primes (the high bound is excluded, low bound is included)
+    * Slices are only descriptions, they don't actually store any data -- changing slice elements changes underlying data, and other slices will have changes reflected in them
