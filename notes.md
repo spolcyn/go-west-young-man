@@ -58,3 +58,5 @@ A blog post about these new defer, panic, and recover features.
 - Go has arrays, and its length is part of its type so they can't be resized
     * "Slices" are dynamically-sized, subsets of the elements of an array - you form it with a high and low bound on another array, e.g., var s []int = primes[1:4], which includes elements 1-3 of primes (the high bound is excluded, low bound is included)
     * Slices are only descriptions, they don't actually store any data -- changing slice elements changes underlying data, and other slices will have changes reflected in them
+    * Slice literals create an array, then the slice that references it (e.g., []bool{true, true, false} creates then references an array of length 3 with that data)
+    * Slice defaults for low bound is 0 and length of slice (read: array that it references) for high bound
