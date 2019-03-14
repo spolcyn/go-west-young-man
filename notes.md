@@ -60,3 +60,6 @@ A blog post about these new defer, panic, and recover features.
     * Slices are only descriptions, they don't actually store any data -- changing slice elements changes underlying data, and other slices will have changes reflected in them
     * Slice literals create an array, then the slice that references it (e.g., []bool{true, true, false} creates then references an array of length 3 with that data)
     * Slice defaults for low bound is 0 and length of slice (read: array that it references) for high bound
+    * Slice has length (number of elements it contains), capacity (number of elements of underlying array, counting from first element in slice)
+    * Nil slice is the zero value of a slice
+    * the 'make' function can make slices, usage make([]type, length, capacity) - this is the dynamic-array sizing method

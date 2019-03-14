@@ -6,14 +6,21 @@ import (
 )
 
 func main() {
-    s := []int{2,3,5,7,11,13}
+    a := make([]int, 5)
+    printSlice("a", a)
 
-    s = s[1:4]
-    fmt.Println(s)
+    b := make([]int, 0, 5)
+    printSlice("b", b)
+    
+    c := b[:2]
+    printSlice("c", c)
 
-    s = s[:2]
-    fmt.Println(s)
-
-    s = s[1:]
-    fmt.Println(s)
+    d := c[2:5]
+    printSlice("d", d)
 }
+
+func printSlice(s string, x []int) {
+    fmt.Printf("%s len=%d cap=%d %v\n", s, len(x), cap(x), x)
+}
+
+
