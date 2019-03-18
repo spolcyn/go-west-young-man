@@ -56,6 +56,9 @@ A blog post about these new defer, panic, and recover features.
     * Can get address of struct using the & operator
 - You can natively set a value using exponential notation, e.g., 1e9 will set something to a billion
 - Go has arrays, and its length is part of its type so they can't be resized
+    * An array var "denotes the entire array", not a pointer to the first element; thus, array arguments are copied, not referenced.
+    * "Kind of like a struct but with indexed rather than named fields"
+- Slices 
     * "Slices" are dynamically-sized, subsets of the elements of an array - you form it with a high and low bound on another array, e.g., var s []int = primes[1:4], which includes elements 1-3 of primes (the high bound is excluded, low bound is included)
     * Slices are only descriptions, they don't actually store any data -- changing slice elements changes underlying data, and other slices will have changes reflected in them
     * Slice literals create an array, then the slice that references it (e.g., []bool{true, true, false} creates then references an array of length 3 with that data)
@@ -63,3 +66,4 @@ A blog post about these new defer, panic, and recover features.
     * Slice has length (number of elements it contains), capacity (number of elements of underlying array, counting from first element in slice)
     * Nil slice is the zero value of a slice
     * the 'make' function can make slices, usage make([]type, length, capacity) - this is the dynamic-array sizing method
+    * Slice can't be grown beyond its capacity/can't be re-sliced below 0 to access earlier elements
