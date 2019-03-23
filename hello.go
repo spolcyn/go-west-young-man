@@ -3,12 +3,13 @@ package main
 
 import (
     "fmt" //'formatted IO'
+    "golang.org/x/tour/pic"
 )
 
-var pow = []int{1,2,4,8,16,32,64,128}
+func Pic(dx, dy int) [][]uint8 {
+
+}
 
 func main() {
-    for i,v := range pow {
-        fmt.Printf("2**%d = %d\n", i, v)
-    }
+    pic.Show(Pic)
 }

@@ -71,3 +71,4 @@ A blog post about these new defer, panic, and recover features.
     * Can use "..." to expand a slice to its elements, e.g. "b := []int{1,2,3} // a = append(a, b...)
     * Since re-slicing doesn't create a new array, if working with a small part of big array, copy the slice and let the old one get garbage collected
 - Range: iterate over slice or map -- two vars for each iteration, one the index, one a copy of the element at that index
+    * Can skip using index or value by the " _ " character, e.g., for i, _ := range pow. If you just want the index, can just straight omit the second var (so it seems for i, _ := range pow and for i := range pow are the same)
