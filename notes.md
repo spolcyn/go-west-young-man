@@ -76,3 +76,6 @@ A blog post about these new defer, panic, and recover features.
     * Map literals can be declared with their keys & values - "if top-level type is just a type name, you can omit it from the elements of the literal" - Question: What is a top-level type, and when would it not just be a type name? A slice, array?
     * Accessing done with array notation, deletion done w/ the delete(map, key) function.
     * Testing key present done w/ 2-value assignment (elem, ok = m[key] -> ok true iff key is in m, if ok=false, then elem is zero value for map's element type)
+- Function values: Can pass functions like arguments. Can also define functions quickly within a method, e.g., func main() {hypot := func(x, y float64) float64 { return math.Sqrt(x*x + y*y)}
+- Function closures: Go functions may be 'closures'
+    * Closure: 
