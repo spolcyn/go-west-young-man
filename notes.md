@@ -78,4 +78,6 @@ A blog post about these new defer, panic, and recover features.
     * Testing key present done w/ 2-value assignment (elem, ok = m[key] -> ok true iff key is in m, if ok=false, then elem is zero value for map's element type)
 - Function values: Can pass functions like arguments. Can also define functions quickly within a method, e.g., func main() {hypot := func(x, y float64) float64 { return math.Sqrt(x*x + y*y)}
 - Function closures: Go functions may be 'closures'
-    * Closure: 
+    * Closure: https://stackoverflow.com/questions/36636/what-is-a-closure
+    * A closure is a function that retains access to all the local variables in scope when it was called. So, if you have a function funcParent and define some variable 'parentVar' there, then define a function funcChild in funcParent and you return funcChild, then when you call funcChild later, parentVar will still be accessible by it.
+    * A closure is a "persistent local variable scope" (per SO) or the "function is 'bound' to the variables" (per tut) or the closure "encloses" the scope (per me?) 
