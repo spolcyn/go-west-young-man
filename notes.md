@@ -81,3 +81,11 @@ A blog post about these new defer, panic, and recover features.
     * Closure: https://stackoverflow.com/questions/36636/what-is-a-closure
     * A closure is a function that retains access to all the local variables in scope when it was called. So, if you have a function funcParent and define some variable 'parentVar' there, then define a function funcChild in funcParent and you return funcChild, then when you call funcChild later, parentVar will still be accessible by it.
     * A closure is a "persistent local variable scope" (per SO) or the "function is 'bound' to the variables" (per tut) or the closure "encloses" the scope (per me?) 
+
+## Methods
+
+- Methods: A perfectly normal function, just with a special "receiver" argument. This appears between the func keyword and method name
+    * e.g.: func (v Vertex) Abs() float64 { return math.Sqrt(v.X * v.X + v.Y * v.Y) (Vertex v is the receiver)
+    * Equivalent: func Abs(v Vertex) float64 { ... }
+    * Go doesn't have classes, so methods are defined on types. Then you can call the first example as v.Abs()
+    * Can only declare method with receiver whose type is defined in same package as the method (so no using built-in types like int, though you can redefine to be like 'type MyInt int' and then use MyInt). Moreover, it can be used for non-struct types, like the just-named example for MyInt (=int)
