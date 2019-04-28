@@ -3,29 +3,27 @@ package main
 
 import (
     "fmt" //'formatted IO'
+    "math"
 )
 
-// TODO: Implement a fibonnaci function that returns a function (a closure) that returns successive fibonacci numbers
+type Vertex struct {
+    X, Y float64
+}
 
-// fibonacci is a function that returns
-// a function that returns an int
-func fibonacci() func() int {
-    current := 0
-    previous := 1
+func (v Vertex) Abs() float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
 
-    return func() int {
-       temp := current
-       current += previous
-       previous = temp
-       return previous
-   }
-
+func AbsFunc(v Vertex) float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
 
 func main() {
-    f := fibonacci()
+    v := Vertex{3,4}
+    fmt.Println(v.Abs())
+    fmt.Println(AbsFunc(v))
 
-    for i := 0; i < 10; i++ {
-        fmt.Println(f())
-    }
+    p := &Vertex{3,4}
+    fmt.Println(p.Abs())
+    fmt.Println(AbsFunc(*p))
 }

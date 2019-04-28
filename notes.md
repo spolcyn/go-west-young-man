@@ -89,3 +89,6 @@ A blog post about these new defer, panic, and recover features.
     * Equivalent: func Abs(v Vertex) float64 { ... }
     * Go doesn't have classes, so methods are defined on types. Then you can call the first example as v.Abs()
     * Can only declare method with receiver whose type is defined in same package as the method (so no using built-in types like int, though you can redefine to be like 'type MyInt int' and then use MyInt). Moreover, it can be used for non-struct types, like the just-named example for MyInt (=int)
+    * Recievers can also be pointers, which allows you to modify the receiver. When it's a value receiver, the method operates on a copy.
+    * For methods with receivers, the compiler correctly interprets how to treat a receiver if it's given as a value or as a pointer (e.g., if the receiver is a pointer, (&<var>).func() is implicitly called)
+    * The same thing happens when calling the method on a pointer or on a value (e.g., v.func() and pV := &v pV.func() evaluate to the same thing)
