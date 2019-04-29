@@ -92,3 +92,13 @@ A blog post about these new defer, panic, and recover features.
     * Recievers can also be pointers, which allows you to modify the receiver. When it's a value receiver, the method operates on a copy.
     * For methods with receivers, the compiler correctly interprets how to treat a receiver if it's given as a value or as a pointer (e.g., if the receiver is a pointer, (&<var>).func() is implicitly called)
     * The same thing happens when calling the method on a pointer or on a value (e.g., v.func() and pV := &v pV.func() evaluate to the same thing)
+- Choosing value vs. pointer receiver:
+    * Pointer: Want method to modify value, and avoid copying value on each method call. (sounds like mostly want to use it this way)
+    * In general, all methods on given type should be EITHER pointer OR value
+
+## Interfaces
+
+- Definition: A set of method signatures
+    * Value of Interface type can hold any value implementing those methods
+- Implementation is implicit -- no explicit "implements" keyword or anything of the source. 
+- Implicit interfaces decouple the interface def & implementation (why is this useful? - one site suggests is that you can define an interfaec that's automatically implemented by types already written)

@@ -3,27 +3,21 @@ package main
 
 import (
     "fmt" //'formatted IO'
-    "math"
 )
 
-type Vertex struct {
-    X, Y float64
+type I interface {
+    M()
 }
 
-func (v Vertex) Abs() float64 {
-    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+type T struct {
+    S string
 }
 
-func AbsFunc(v Vertex) float64 {
-    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+func (t T) M() {
+    fmt.Println(t.S)
 }
 
 func main() {
-    v := Vertex{3,4}
-    fmt.Println(v.Abs())
-    fmt.Println(AbsFunc(v))
-
-    p := &Vertex{3,4}
-    fmt.Println(p.Abs())
-    fmt.Println(AbsFunc(*p))
+    var i I = T{"hello"}
+    i.M()
 }
