@@ -102,3 +102,6 @@ A blog post about these new defer, panic, and recover features.
     * Value of Interface type can hold any value implementing those methods
 - Implementation is implicit -- no explicit "implements" keyword or anything of the source. 
 - Implicit interfaces decouple the interface def & implementation (why is this useful? - one site suggests is that you can define an interfaec that's automatically implemented by types already written)
+- An interface is in fact a value: tuple as such: (value, type) so an interface value holds a value of a "specific underlying concrete type")
+- Interestingly, Go variables seem to have the function they were in as part of their type (see methods part 11 for an example)
+- You can call methods with nil receivers (executes just fine) - note "an interface value that holds a nil concrete value is, itself, non-nil"
