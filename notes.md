@@ -105,3 +105,6 @@ A blog post about these new defer, panic, and recover features.
 - An interface is in fact a value: tuple as such: (value, type) so an interface value holds a value of a "specific underlying concrete type")
 - Interestingly, Go variables seem to have the function they were in as part of their type (see methods part 11 for an example)
 - You can call methods with nil receivers (executes just fine) - note "an interface value that holds a nil concrete value is, itself, non-nil"
+- Nil-interface value holds NEITHER value nor concrete type -- thus, calling a method on this is a run-time error (no type w/in interface, so don't know concretely which method to call)
+- The empty interface specifies 0 methods, and thus may hold values of any type (b/c every type implements at least 0 methods)
+    * Use case: Code that handle values of any unknown type, e.g., fmt.Print takes arguments of type interface{}

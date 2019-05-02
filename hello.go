@@ -3,44 +3,20 @@ package main
 
 import (
     "fmt" //'formatted IO'
-    "math"
 )
 
-type I interface {
-    M()
-}
-
-type T struct {
-    S string
-}
-
-func (t *T) M() {
-    if t == nil {
-        fmt.Println("<nil>")
-        return
-    }
-    fmt.Println(t.S)
-}
-
-type F float64
-
-func (f F) M() {
-    fmt.Println(f)
-}
-
-func main() {
-    var i I
-
-    var t *T
-    i = t
+func main() { 
+    var i interface{}
     describe(i)
-    i.M()
 
-    i = F(math.Pi)
+    i = 42
     describe(i)
-    i.M()
+
+    i = "hello"
+    describe(i)
+
 }
 
-func describe(i I) {
+func describe(i interface{}) {
     fmt.Printf("(%v, %T)\n", i, i)
 }
