@@ -108,3 +108,6 @@ A blog post about these new defer, panic, and recover features.
 - Nil-interface value holds NEITHER value nor concrete type -- thus, calling a method on this is a run-time error (no type w/in interface, so don't know concretely which method to call)
 - The empty interface specifies 0 methods, and thus may hold values of any type (b/c every type implements at least 0 methods)
     * Use case: Code that handle values of any unknown type, e.g., fmt.Print takes arguments of type interface{}
+- Type Assertion: Get access to the underlying concrete value. If there's no underlying concrete value of the type requested, panic! 
+    * You can use a 2-return value type though, which returns the underlying value and a boolean (underlying is the 0 value for that type if failure)
+- Type Switch: Use to run different cases depending on which type a variable is
