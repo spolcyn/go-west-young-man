@@ -111,3 +111,4 @@ A blog post about these new defer, panic, and recover features.
 - Type Assertion: Get access to the underlying concrete value. If there's no underlying concrete value of the type requested, panic! 
     * You can use a 2-return value type though, which returns the underlying value and a boolean (underlying is the 0 value for that type if failure)
 - Type Switch: Use to run different cases depending on which type a variable is
+- Stringers: Like a toString() Java method, usually looked for when wanting to describe something as a string

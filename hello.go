@@ -5,19 +5,21 @@ import (
     "fmt" //'formatted IO'
 )
 
-func do(i interface{}) {
-    switch v := i.(type) {
-    case int:
-        fmt.Printf("Twice %v is %v\n", v, v*2)
-    case string:
-        fmt.Printf("%q is %v bytes long\n", v, len(v))
-    default:
-        fmt.Printf("I don't know about type %T!\n", v)
-    }
+type IPAddr [4]byte
+
+//TODO: Add a s "String() string" method to IPAddr
+
+func (ip IPAddr) String() string {
+    return fmt.Sprintf("%v.%v.%v.%v", ip[0], ip[1], ip[2], ip[3])
 }
 
 func main() {
-    do(21)
-    do("hello")
-    do(true)
+    hosts := map[string]IPAddr{
+        "loopback": {127, 0, 0, 1},
+        "googleDNS": {8, 8, 8 , 8},
+    }
+
+    for name, ip := range hosts {
+        fmt.Printf("%v: %v\n", name, ip)
+    }
 }
