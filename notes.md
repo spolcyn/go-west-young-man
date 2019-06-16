@@ -116,3 +116,4 @@ A blog post about these new defer, panic, and recover features.
 ## Errors
 - Errors are also interfaces. nil error is success, non-nil denotes some type of error
 - When you print an error, it calls a method that implements the interface (I guess in that file?)
+- The "Exercise: Errors" asks why you get an infinite loop if calling fmt.Sprint(e) inside the error method, but works fine if you cast e to a float64 first. The reason is because the func Error() implements the String interface, so will just be repeatedly called when the program attempts to convert the function to a string, either from Sprint() or from a format string.
