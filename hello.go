@@ -2,20 +2,38 @@
 package main
 
 import (
-    "golang.org/x/tour/reader"
+    "io"
+    "os"
+    "strings"
+    //"fmt"
 )
 
-type MyReader struct{}
+type rot13Reader struct {
+    r io.Reader
+}
 
-// TODO: Add a Read([]byte) (int, error) method to MyReader
-func (mr MyReader) Read(b []byte) (int, error) {
-    for i := 0; i < 8; i++ {
-        b[i] = 'A'
+func (rot13 rot13Reader) Read(b []byte) (int, error) {
+    rot13.r.Read(b);
+
+    for i := 0; i < len(b); i++ {
+        if b[i] >= 65 && b[i] <= 90 {
+            b[i] += 13
+            if b[i] > 90 {
+                b[i] -= 26
+            }
+        } else if b[i] >= 97 && b[i] <= 122 {
+            b[i] += 13
+            if b[i] > 122 {
+                b[i] -= 26
+            }
+        }
     }
 
-    return 8, nil
+    return len(b), nil
 }
 
 func main() {
-    reader.Validate(MyReader{})
+    s := strings.NewReader("Lbh penpxrq gur pbqr!")
+    r := rot13Reader{s}
+    io.Copy(os.Stdout, &r)
 }
