@@ -2,38 +2,26 @@
 package main
 
 import (
-    "io"
-    "os"
-    "strings"
-    //"fmt"
+    "golang.org/x/tour/pic"
+    "image"
+    "image/color"
 )
 
-type rot13Reader struct {
-    r io.Reader
+type Image struct{}
+
+func (m Image) ColorModel() color.Model {
+    return color.RGBAModel
 }
 
-func (rot13 rot13Reader) Read(b []byte) (int, error) {
-    rot13.r.Read(b);
+func (m Image) Bounds() image.Rectangle {
+    return image.Rect(0,0, 512, 512)
+}
 
-    for i := 0; i < len(b); i++ {
-        if b[i] >= 65 && b[i] <= 90 {
-            b[i] += 13
-            if b[i] > 90 {
-                b[i] -= 26
-            }
-        } else if b[i] >= 97 && b[i] <= 122 {
-            b[i] += 13
-            if b[i] > 122 {
-                b[i] -= 26
-            }
-        }
-    }
-
-    return len(b), nil
+func (m Image) At(x, y int) color.Color {
+    return color.RGBA{uint8(x % 255), uint8(y % 255), 255, 255}
 }
 
 func main() {
-    s := strings.NewReader("Lbh penpxrq gur pbqr!")
-    r := rot13Reader{s}
-    io.Copy(os.Stdout, &r)
+    m := Image{}
+    pic.ShowImage(m)
 }
