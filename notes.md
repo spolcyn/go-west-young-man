@@ -118,3 +118,15 @@ A blog post about these new defer, panic, and recover features.
 - When you print an error, it calls a method that implements the interface (I guess in that file?)
 - The "Exercise: Errors" asks why you get an infinite loop if calling fmt.Sprint(e) inside the error method, but works fine if you cast e to a float64 first. The reason is because the func Error() implements the String interface, so will just be repeatedly called when the program attempts to convert the function to a string, either from Sprint() or from a format string.
 - Go does some weird things with semi-colon insertion, so any statements that go together can't allow a brace to end the compoundness
+
+## Goroutines
+
+- A lightweight thread managed by the Go runtime
+    * Threads run in the same address space, access to shared memory must be synchronized
+- Channels: "Typed conduit through which you can send and receive values with the channel operator, `<-`"
+    * ch <- v // send v to channel ch
+    * v := <-ch // receive from ch & assign value to v
+    * Must be created before use: ch := make(chan int) (<- this is an int channel)
+    * Sends & receives block until other side is ready (enables syncing w/o explicit work)
+- Channel Buffering: provide buffer length as second arg, and then sends & receives only block when buffer is full/empty, respectively 
+    * If you modify the concurrency/3 example to overfill the buffer, you get a "all goroutines are asleep - deadlock!" error. neat.
