@@ -130,3 +130,9 @@ A blog post about these new defer, panic, and recover features.
     * Sends & receives block until other side is ready (enables syncing w/o explicit work)
 - Channel Buffering: provide buffer length as second arg, and then sends & receives only block when buffer is full/empty, respectively 
     * If you modify the concurrency/3 example to overfill the buffer, you get a "all goroutines are asleep - deadlock!" error. neat.
+    * Channel closing only necessary when need to tell receiver no more values are coming (e.g., to terminate range loop) (loop: `for i := range c`)
+    * Channel closing can be tested w/ a second parameter: `v, ok := <-ch`
+- Select: Blocks until it can execute one of its cases, if multiple are ready then chooses one at random
+    * Allows waiting for multiple communication ops
+    * In the example, one channel is filled up by a goroutine, and then another one is, so one keeps pulling in order from the c channel until it's empty, and then the quit channel is filled and pulled from
+- Looks like you can declare go routine functions to call inline
