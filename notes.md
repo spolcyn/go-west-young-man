@@ -134,5 +134,11 @@ A blog post about these new defer, panic, and recover features.
     * Channel closing can be tested w/ a second parameter: `v, ok := <-ch`
 - Select: Blocks until it can execute one of its cases, if multiple are ready then chooses one at random
     * Allows waiting for multiple communication ops
-    * In the example, one channel is filled up by a goroutine, and then another one is, so one keeps pulling in order from the c channel until it's empty, and then the quit channel is filled and pulled from
-- Looks like you can declare go routine functions to call inline
+    * In the example, one channel is filled up by a goroutine, and then another one is, so one keeps 
+pulling in order from the c channel until it's empty, and then the quit channel is filled and pulled from
+    * Can use `default` case like in switch to run whenever no other case is ready
+    * the time.Tick is a channel that sends ticks, time.After sends after that amount of time has elapsed
+- Looks like you can declare go routine functions to call inline - neat
+- My solution to the exercise works, but I never explicity closed the channels; did the 
+closed1/closed2 thing work because there were no more values to receive and thus it returned false 
+(and not that it also had to be explicitly closed?)

@@ -1,31 +1,49 @@
 // all programs start running in package main
 package main
 
+// Exercise: Equivalent Binary Trees
+// Want to check whether two binary trees store same sequence of values
+// Uses tree package, which defines type Tree struct { Left *Tree Value int Right *Tree }
+// We'll implement Walk & Same functions
+
 import (
+    "golang.org/x/tour/tree"
     "fmt"
 )
 
-func fibonacci(c, quit chan int) {
-    x, y := 0, 1
+// `Walk` walks the tree t, sending all values
+// from the tree to the channel ch
+// Inorder traversal
+func Walk(t *tree.Tree, ch chan int) {
+    if t == nil {
+        return
+    }
+
+    Walk(t.Left, ch)
+    ch <- t.Value
+    Walk(t.Right, ch)
+}
+
+// `Same` determines whether the trees t1 and t2 contain the same values
+func Same(t1, t2 *tree.Tree) bool {
+    ch1 := make(chan int, 10)
+    ch2 := make(chan int, 10)
+
+    go Walk(t1, ch1)
+    go Walk(t2, ch2)
+
     for {
-        select {
-        case c <- x:
-            x, y = y, x +y
-        case <-quit:
-            fmt.Println("quit")
-            return
+        i, closed1 := <- ch1
+        j, closed2 := <- ch2
+        if i != j {
+            return false
+        }
+        if closed1 && closed2 {
+            return true
         }
     }
 }
 
 func main() {
-    c := make(chan int)
-    quit := make(chan int)
-    go func() {
-        for i := 0; i < 10; i++ {
-            fmt.Println(<-c)
-        }
-        quit <- 0
-    }()
-    fibonacci(c, quit)
+    fmt.Println(Same(tree.New(1), tree.New(1)))
 }
