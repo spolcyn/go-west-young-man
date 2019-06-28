@@ -142,3 +142,8 @@ pulling in order from the c channel until it's empty, and then the quit channel 
 - My solution to the exercise works, but I never explicity closed the channels; did the 
 closed1/closed2 thing work because there were no more values to receive and thus it returned false 
 (and not that it also had to be explicitly closed?)
+- Can use sync.Mutex and lock/unlock to ensure the code between the lock and the unlock are only 
+being executed by one goroutine at a time. If lock has been called and a goroutine enters that 
+method and tries to acquire a lock, it'll fail and block there
+    * Now working on the web crawler exercise. Seems like need to parallelize the Crawl calls, and to not go down a certain URL if it's already in the map?
+    * Some type of locking or channeling will be needed here, but not sure what yet.

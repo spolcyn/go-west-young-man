@@ -1,49 +1,99 @@
 // all programs start running in package main
 package main
 
-// Exercise: Equivalent Binary Trees
-// Want to check whether two binary trees store same sequence of values
-// Uses tree package, which defines type Tree struct { Left *Tree Value int Right *Tree }
-// We'll implement Walk & Same functions
-
 import (
-    "golang.org/x/tour/tree"
     "fmt"
 )
 
-// `Walk` walks the tree t, sending all values
-// from the tree to the channel ch
-// Inorder traversal
-func Walk(t *tree.Tree, ch chan int) {
-    if t == nil {
+type Fetcher interface {
+    // Fetch returns the body of URL and
+    // a slice of URLs found on that page.
+    Fetch(url string) (body string, urls []string, err error)
+}
+
+// Crawl uses fetcher to recursively crawl
+// pages starting with url, to a maximum of depth
+func Crawl(url string, depth int, fetcher Fetcher, crawled map[string]string) {
+    // TODO fetch URLs in parallel
+    // TODO don't fetch the same URL twice
+    // This implementation doesn't do either
+    if depth <= 0 {
         return
     }
 
-    Walk(t.Left, ch)
-    ch <- t.Value
-    Walk(t.Right, ch)
-}
-
-// `Same` determines whether the trees t1 and t2 contain the same values
-func Same(t1, t2 *tree.Tree) bool {
-    ch1 := make(chan int, 10)
-    ch2 := make(chan int, 10)
-
-    go Walk(t1, ch1)
-    go Walk(t2, ch2)
-
-    for {
-        i, closed1 := <- ch1
-        j, closed2 := <- ch2
-        if i != j {
-            return false
-        }
-        if closed1 && closed2 {
-            return true
-        }
+    body, urls, err := fetcher.Fetch(url)
+    if err != nil {
+        fmt.Println(err)
+        return
     }
+
+    fmt.Printf("found: %s %q\n", url, body)
+
+    for _, u := range urls {
+        _, visited := crawled[u]
+        if !visited {
+            crawled[u] = body
+            go Crawl(u, depth-1, fetcher, crawled)
+        }
+
+    }
+    return
 }
 
 func main() {
-    fmt.Println(Same(tree.New(1), tree.New(1)))
+	// map with URL string keys for string bodies
+	crawled := make(map [string]string)
+
+    Crawl("https://golang.org/", 4, fetcher, crawled)
+
+	fmt.Printf("%v", crawled)
+}
+
+// fakeFetcher is a fetcher that returns canned results.
+type fakeFetcher map[string]*fakeResult
+
+type fakeResult struct {
+    body string
+    urls []string
+}
+
+func (f fakeFetcher) Fetch(url string) (string, []string, error) {
+    if res, ok := f[url]; ok {
+        return res.body, res.urls, nil
+    }
+    return "", nil, fmt.Errorf("not found: %s", url)
+}
+
+// fetcher is a populated fakeFetcher
+var fetcher = fakeFetcher {
+"https://golang.org/": &fakeResult{
+        "The Go Programming Language",
+        []string{
+            "https://golang.org/pkg/",
+            "https://golang.org/cmd/",
+        },
+    },
+    "https://golang.org/pkg/": &fakeResult{
+        "Packages",
+        []string{
+            "https://golang.org/",
+            "https://golang.org/cmd/",
+            "https://golang.org/pkg/fmt/",
+            "https://golang.org/pkg/os/",
+        },
+    },
+    "https://golang.org/pkg/fmt/": &fakeResult{
+        "Package fmt",
+        []string{
+            "https://golang.org/",
+            "https://golang.org/pkg/",
+        },
+    },
+    "https://golang.org/pkg/os/": &fakeResult{
+        "Package os",
+        []string{
+            "https://golang.org/",
+            "https://golang.org/pkg/",
+        },
+    },
 }
