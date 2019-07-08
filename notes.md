@@ -147,3 +147,4 @@ being executed by one goroutine at a time. If lock has been called and a gorouti
 method and tries to acquire a lock, it'll fail and block there
     * Now working on the web crawler exercise. Seems like need to parallelize the Crawl calls, and to not go down a certain URL if it's already in the map?
     * Some type of locking or channeling will be needed here, but not sure what yet.
+    * The golang solution suggests using a goroutine that consists of the recursive Crawl call, and then a channel sending back a bool. This is clever as it gives a way to send back the result and prevent things from continuing on, without passing another argumnet.
